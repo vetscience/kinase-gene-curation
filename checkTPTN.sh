@@ -1,0 +1,1 @@
+awk -F"\t" '{for(i=1; i<=NF; i++){print NR"\t"$i}}' $1 | sort -k1,1n -k2,2 | awk -F"\t" 'BEGIN{start = 1}{if($1 == start){string = string""$2}else{if(hash[string]!=""){print hash[string]" and "$1" are the same "string}else{hash[string]=start; start=$1; string=$2}}}END{if(hash[string]!=""){print hash[string]" and "$1" are the same "string}}'
